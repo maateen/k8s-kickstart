@@ -31,3 +31,13 @@ $ ansible-playbook playbook.yaml
     - [x] NginX
     - [x] Traefik
     - [ ] Voyager
+- [ ] Setup Logging Stack
+    - [ ] Elasticsearch
+    - [ ] Fluentbit
+    - [ ] Fluentd
+    - [ ] Kibana
+    - [ ] Logstash
+- [ ] Setup Monitoring Stack
+    - [ ] Alertmanager
+    - [ ] Prometheus
+    - [ ] Grafana
