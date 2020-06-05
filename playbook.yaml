@@ -5,6 +5,7 @@
 
   vars_files:
     - vars/cni.yaml
+    - vars/ingress.yaml
     - vars/namespace.yaml
 
   tasks:
@@ -15,3 +16,7 @@
     - name: Setup namespace
       include_tasks: tasks/namespace.yaml
       when: setup_namespace == true
+
+    - name: Setup ingress controller
+      include_tasks: tasks/ingress.yaml
+      when: setup_ingress == true

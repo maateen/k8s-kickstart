@@ -1,0 +1,4 @@
+setup_ingress: true
+ingress_provider: nginx
+ingress_name: ingress-nginx
+ingress_namespace: kube-system

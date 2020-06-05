@@ -1,0 +1,25 @@
+- name: Add nginx's chart repository to Helm
+  community.kubernetes.helm_repository:
+    name: ingress-nginx
+    repo_url: "https://kubernetes.github.io/ingress-nginx"
+  when: ingress_provider == 'nginx'
+
+- name: Create nginx ingress controller
+  community.kubernetes.helm:
+    name: "{{ ingress_name }}"
+    chart_ref: ingress-nginx/ingress-nginx
+    release_namespace: "{{ ingress_namespace }}"
+  when: ingress_provider == 'nginx'
+
+- name: Add traefik's chart repository to Helm
+  community.kubernetes.helm_repository:
+    name: traefik
+    repo_url: "https://containous.github.io/traefik-helm-chart"
+  when: ingress_provider == 'traefik'
+
+- name: Create traefik ingress controller
+  community.kubernetes.helm:
+    name: "{{ ingress_name }}"
+    chart_ref: traefik/traefik
+    release_namespace: "{{ ingress_namespace }}"
+  when: ingress_provider == 'traefik'
