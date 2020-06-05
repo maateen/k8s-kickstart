@@ -1,0 +1,2 @@
+setup_cni: true
+cni_provider: weave

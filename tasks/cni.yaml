@@ -1,0 +1,31 @@
+- name: Install calico CNI plugin
+  k8s:
+    state: present
+    definition: "{{ lookup('url', 'https://docs.projectcalico.org/v3.14/manifests/calico.yaml') }}"
+  when: cni_provider == 'calico'
+
+- name: Install cilium CNI plugin
+  k8s:
+    state: present
+    definition: "{{ lookup('url', 'https://raw.githubusercontent.com/cilium/cilium/v1.6/install/kubernetes/quick-install.yaml') }}"
+  when: cni_provider == 'cilium'
+
+- name: Install flannel CNI plugin
+  k8s:
+    state: present
+    definition: "{{ lookup('url', 'https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml') }}"
+  when: cni_provider == 'flannel'
+
+- name: Get kubectl version
+  shell: "kubectl version | base64 | tr -d '\n'"
+  register: kubectl_version
+
+- name: Configure weave url
+  set_fact:
+    weave_url: "https://cloud.weave.works/k8s/net?k8s-version={{ kubectl_version.stdout }}"
+
+- name: Install weave CNI plugin
+  k8s:
+    state: present
+    definition: "{{ lookup('url', weave_url, split_lines=False) | from_yaml_all | list }}"
+  when: cni_provider == 'weave'

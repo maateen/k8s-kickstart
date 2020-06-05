@@ -1,0 +1,5 @@
+setup_namespace: true
+namespaces:
+  - production
+  - staging
+  - development

@@ -1,0 +1,17 @@
+---
+- name: "Playing with Ansible and Git"
+  hosts: 127.0.0.1
+  connection: local
+
+  vars_files:
+    - vars/cni.yaml
+    - vars/namespace.yaml
+
+  tasks:
+    - name: Setup pod network add-on (CNI)
+      include_tasks: tasks/cni.yaml
+      when: setup_cni == true
+
+    - name: Setup namespace
+      include_tasks: tasks/namespace.yaml
+      when: setup_namespace == true
