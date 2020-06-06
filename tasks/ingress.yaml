@@ -1,3 +1,16 @@
+- name: Add ambassador's chart repository to Helm
+  community.kubernetes.helm_repository:
+    name: datawire
+    repo_url: "https://www.getambassador.io"
+  when: ingress_provider == 'ambassador'
+
+- name: Create ambassador ingress controller
+  community.kubernetes.helm:
+    name: "{{ ingress_name }}"
+    chart_ref: datawire/ambassador
+    release_namespace: "{{ ingress_namespace }}"
+  when: ingress_provider == 'ambassador'
+
 - name: Add nginx's chart repository to Helm
   community.kubernetes.helm_repository:
     name: ingress-nginx
@@ -23,3 +36,16 @@
     chart_ref: traefik/traefik
     release_namespace: "{{ ingress_namespace }}"
   when: ingress_provider == 'traefik'
+
+- name: Add voyager's chart repository to Helm
+  community.kubernetes.helm_repository:
+    name: appscode
+    repo_url: "https://charts.appscode.com/stable/"
+  when: ingress_provider == 'voyager'
+
+- name: Create voyager ingress controller
+  community.kubernetes.helm:
+    name: "{{ ingress_name }}"
+    chart_ref: appscode/voyager
+    release_namespace: "{{ ingress_namespace }}"
+  when: ingress_provider == 'voyager'

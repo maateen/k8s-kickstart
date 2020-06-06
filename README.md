@@ -3,7 +3,8 @@ An Ansible Playbook which gifts you all components you require on K8s cluster.
 
 ## Requirements
 
-- K8s Cluster
+- Kubernetes (>= 1.6)
+- Helm3
 
 Intall dependencies to run the playbook:
 
@@ -18,6 +19,19 @@ $ ansible-galaxy collection install -r requirements.yaml
 $ ansible-playbook playbook.yaml
 ```
 
+## Ansible Variables
+
+| Variable| Default | Supported Variables |
+| ------- | ------- | ------------------- |
+| setup_cni | `false` | `true`, `false` |
+| cni_provider | `flannel` | `calico`, `cilium`, `flannel`, `weave` |
+| setup_namespace | `true` | `true`, `false` |
+| namespaces | <code>- production<br>- staging<br>- development</code> | any valid yaml list |
+| setup_ingress | `true` | `true`, `false` |
+| ingress_provider | `nginx` | `ambassador`, `nginx`, `traefik`, `voyager` |
+| ingress_name | `ingress-nginx` | any valid string |
+| ingress_namespace | `kube-system` | any valid namespace |
+
 ## Roadmap
 
 - [x] Setup Pod Network Add-on (CNI)
@@ -27,10 +41,10 @@ $ ansible-playbook playbook.yaml
     - [x] Weave
 - [x] Setup Namespace
 - [x] Setup Ingress Controller
-    - [ ] Ambassador
+    - [x] Ambassador
     - [x] NginX
     - [x] Traefik
-    - [ ] Voyager
+    - [x] Voyager
 - [ ] Setup Logging Stack
     - [ ] Elasticsearch
     - [ ] Fluentbit

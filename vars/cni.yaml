@@ -1,2 +1,2 @@
-setup_cni: true
-cni_provider: weave
+setup_cni: false
+cni_provider: flannel
