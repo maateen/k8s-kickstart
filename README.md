@@ -26,7 +26,7 @@ $ ansible-playbook playbook.yaml
 | setup_cni | `false` | `true`, `false` |
 | cni_provider | `flannel` | `calico`, `cilium`, `flannel`, `weave` |
 | setup_namespace | `true` | `true`, `false` |
-| namespaces | <code>- production<br>- staging<br>- development</code> | any valid yaml list |
+| namespaces | `production`, `staging`, `development` | any valid yaml list |
 | setup_ingress | `true` | `true`, `false` |
 | ingress_provider | `nginx` | `ambassador`, `nginx`, `traefik`, `voyager` |
 | ingress_name | `ingress-nginx` | any valid string |
